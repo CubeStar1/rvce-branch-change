@@ -1,36 +1,112 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# RVCE Branch Change App
+
+An application to view and analyze branch change results at RV College of Engineering. Built with Next.js 14, TypeScript, Tailwind CSS, and Supabase.
+
+## Features
+
+-  **Statistics**
+  - Branch-wise inflow and outflow analysis
+  - CGPA cutoff trends
+  - Detailed statistics for each branch
+  - Visual data representation using charts
+
+-  **Merit Lists**
+  - Complete merit lists for 2023 and 2024
+  - Filter by USN
+  - View student preferences
+  - CGPA and backlog information
+
+- **Allotment Results**
+  - Final branch change allotments
+  - Previous and new branch details
+  - Student-wise results
+  - Sortable and filterable tables
+
+
+## Tech Stack
+
+- **Framework**: Next.js 14 
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **UI Components**: shadcn/ui
+- **Database**: Supabase
+- **Charts**: Recharts
+- **Tables**: TanStack Table
 
 ## Getting Started
 
-First, run the development server:
-
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/CubeStar1/rvce-branch-change.git
+cd rvce-branch-change
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Set up environment variables:
+```bash
+cp .env.example .env.local
+```
+Fill in your Supabase credentials in `.env.local`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Run the development server:
+```bash
+npm run dev
+```
 
-## Learn More
+5. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-To learn more about Next.js, take a look at the following resources:
+## Database Schema
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Merit List Table
+```sql
+CREATE TABLE merit_list_2024 (
+  id INTEGER PRIMARY KEY,
+  usn TEXT,
+  cgpa NUMERIC,
+  backlog INTEGER,
+  current_branch TEXT,
+  preference_1 TEXT,
+  preference_2 TEXT,
+  preference_3 TEXT,
+  preference_4 TEXT
+);
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Allotment List Table
+```sql
+CREATE TABLE allotment_list_2024 (
+  id INTEGER PRIMARY KEY,
+  usn TEXT,
+  name TEXT,
+  old_branch TEXT,
+  new_branch TEXT,
+  cgpa NUMERIC,
+  backlog INTEGER
+);
+```
 
-## Deploy on Vercel
+## Project Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+├── app/
+│   ├── allotment/
+│   │   ├── [year]/
+│   │   └── statistics/
+│   ├── merit-list/
+│   │   └── [year]/
+│   ├── layout.tsx
+│   └── page.tsx
+├── components/
+│   ├── statistics/
+│   │   ├── StatsOverview.tsx
+│   │   └── branch-cards.tsx
+│   ├── ui/
+│   └── Header.tsx
+└── lib/
+    └── supabase/
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
