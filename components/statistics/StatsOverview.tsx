@@ -133,13 +133,13 @@ export function StatsOverview({ data, year }: StatsOverviewProps) {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="">
           <CardHeader>
             <CardTitle>Branch-wise Outflow</CardTitle>
             <CardDescription>Number of students who left each branch</CardDescription>
           </CardHeader>
           <CardContent>
-            <ChartContainer config={outflowConfig} className="min-h-[350px] w-full">
+            <ChartContainer config={outflowConfig} className="w-full">
               <BarChart data={branchStats}>
                 <CartesianGrid vertical={false} />
                 <XAxis
@@ -148,7 +148,10 @@ export function StatsOverview({ data, year }: StatsOverviewProps) {
                   tickMargin={10}
                   axisLine={false}
                 />
-                <YAxis tickLine={false} axisLine={false} />
+                <YAxis
+                 tickLine={false} 
+                 axisLine={false}                
+                />
                 <ChartTooltip
                   cursor={false}
                   content={<ChartTooltipContent hideLabel />}
@@ -166,7 +169,7 @@ export function StatsOverview({ data, year }: StatsOverviewProps) {
           <CardDescription>Minimum CGPA required for each branch</CardDescription>
         </CardHeader>
         <CardContent>
-          <ChartContainer config={cutoffConfig} className="min-h-[400px] w-full">
+          <ChartContainer config={cutoffConfig} className="w-full">
             <BarChart data={branchStats.filter(stat => stat.cutoff !== 0)}>
               <CartesianGrid vertical={false} />
               <XAxis

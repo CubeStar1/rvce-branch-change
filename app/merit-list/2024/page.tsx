@@ -11,6 +11,7 @@ type MeritList = {
   usn: string
   cgpa: number
   backlog: number
+  puc: number
   current_branch: string
   preference_1: string
   preference_2: string
@@ -30,6 +31,10 @@ const columns: ColumnDef<MeritList>[] = [
   {
     accessorKey: "backlog",
     header: "Backlogs",
+  },
+  {
+    accessorKey: "puc",
+    header: "PUC",
   },
   {
     accessorKey: "current_branch",

@@ -69,7 +69,7 @@ export function Header() {
         <div className="flex items-center">
           <Link href="/" className="flex items-center space-x-2">
             <Image src="/rvce-branch-change-logo.png" alt="RVCE Branch Change" width={32} height={32} />
-            <span className="hidden md:block text-xl font-bold">RVCE Branch Change</span>
+            <span className="text-sm md:text-xl font-bold">RVCE Branch Change</span>
           </Link>
         </div>
         <div className="hidden md:block">

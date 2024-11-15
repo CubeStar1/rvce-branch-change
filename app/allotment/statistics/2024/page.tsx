@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { StatsOverview } from '@/components/statistics/StatsOverview'
 import { BranchCards } from '@/components/statistics/branch-cards'
 import { StatsSkeleton } from '@/components/statistics/stats-skeleton'
-import { Card, CardContent } from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 export default function Statistics2024() {
@@ -43,7 +43,14 @@ export default function Statistics2024() {
           <TabsTrigger value="branches">Branch Details</TabsTrigger>
         </TabsList>
         <TabsContent value="overview" className="space-y-4">
-            <StatsOverview data={data} year="2024" />
+          <Card>
+            <CardHeader>
+              <CardTitle>Allotment Statistics 2024</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <StatsOverview data={data} year="2024" />
+            </CardContent>
+          </Card>
         </TabsContent>
         <TabsContent value="branches" className="space-y-4">
               <BranchCards data={data} />
