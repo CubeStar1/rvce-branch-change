@@ -48,7 +48,7 @@ npm install
 
 3. Set up environment variables:
 ```bash
-cp .env.example .env.local
+cp env.example .env.local
 ```
 Fill in your Supabase credentials in `.env.local`
 
@@ -63,30 +63,53 @@ npm run dev
 
 ### Merit List Table
 ```sql
-CREATE TABLE merit_list_2024 (
-  id INTEGER PRIMARY KEY,
-  usn TEXT,
-  cgpa NUMERIC,
-  backlog INTEGER,
-  current_branch TEXT,
-  preference_1 TEXT,
-  preference_2 TEXT,
-  preference_3 TEXT,
-  preference_4 TEXT
-);
+create table public.merit_list_2025 (
+  usn text not null,
+  cgpa double precision null,
+  backlog bigint null,
+  puc double precision null,
+  "O" bigint null,
+  "A+" bigint null,
+  "A" bigint null,
+  "B+" bigint null,
+  "B" bigint null,
+  "C" bigint null,
+  "P" bigint null,
+  current_branch text null,
+  preference_1 text null,
+  preference_2 text null,
+  preference_3 text null,
+  preference_4 text null,
+  constraint merit_list_2025_pkey primary key (usn)
+) TABLESPACE pg_default;
 ```
 
 ### Allotment List Table
 ```sql
-CREATE TABLE allotment_list_2024 (
-  id INTEGER PRIMARY KEY,
-  usn TEXT,
-  name TEXT,
-  old_branch TEXT,
-  new_branch TEXT,
-  cgpa NUMERIC,
-  backlog INTEGER
-);
+create table public.allotment_list_2024 (
+  id bigint null,
+  usn text not null,
+  name text null,
+  old_branch text null,
+  new_branch text null,
+  cgpa double precision null,
+  backlog bigint null,
+  puc double precision null,
+  "O" bigint null,
+  "A+" bigint null,
+  "A" bigint null,
+  "B+" bigint null,
+  "B" bigint null,
+  "C" bigint null,
+  "P" bigint null,
+  current_branch text null,
+  preference_1 text null,
+  preference_2 text null,
+  preference_3 text null,
+  preference_4 text null,
+  constraint allotment_list_2024_pkey primary key (usn),
+  constraint allotment_list_2024_usn_fkey foreign KEY (usn) references merit_list_2024 (usn) on update CASCADE on delete CASCADE
+) TABLESPACE pg_default;
 ```
 
 ## Project Structure

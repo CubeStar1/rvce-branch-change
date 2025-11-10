@@ -17,12 +17,14 @@ interface NavigationMobileProps {
   components: { title: string; href: string }[];
   meritListItems: { title: string; href: string; description: string }[];
   allotmentItems: { title: string; href: string; description: string }[];
+  statisticsItems: { title: string; href: string; description: string }[];
 }
 
 export function NavigationMobile({ 
   components, 
   meritListItems, 
-  allotmentItems 
+  allotmentItems,
+  statisticsItems
 }: NavigationMobileProps) {
   return (
     <div className="flex justify-end">
@@ -58,6 +60,18 @@ export function NavigationMobile({
               <DropdownMenuSubTrigger>Allotment</DropdownMenuSubTrigger>
               <DropdownMenuSubContent>
                 {allotmentItems.map((item) => (
+                  <DropdownMenuItem key={item.title}>
+                    <Link href={item.href} className="w-full">
+                      {item.title}
+                    </Link>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuSubContent>
+            </DropdownMenuSub>
+            <DropdownMenuSub>
+              <DropdownMenuSubTrigger>Statistics</DropdownMenuSubTrigger>
+              <DropdownMenuSubContent>
+                {statisticsItems.map((item) => (
                   <DropdownMenuItem key={item.title}>
                     <Link href={item.href} className="w-full">
                       {item.title}

@@ -6,19 +6,17 @@ import Link from "next/link"
 export default function Home() {
   return (
     <div className="flex flex-col min-h-[calc(100vh-4rem)]">
-      {/* Hero Section */}
       <section className="flex-1 flex flex-col items-center justify-center py-8 text-center px-4">
         <div className="max-w-3xl space-y-6">
           <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
             RVCE Branch Change Portal
           </h1>
           <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
-            Access branch change results, merit lists, and comprehensive statistics for the years 2023 and 2024.
+            Access branch change results, merit lists, and comprehensive statistics for the years 2024 and 2025.
           </p>
         </div>
       </section>
 
-      {/* Cards Section */}
       <section className="container mx-auto py-8 px-4">
         <div className="grid gap-8 md:grid-cols-3">
           <Card className="relative group hover:shadow-lg transition-all border-t-4 border-t-blue-500">
@@ -33,15 +31,15 @@ export default function Home() {
             </CardHeader>
             <CardContent className="">
               <div className="flex flex-col gap-2">
-                <Link href="/merit-list/2024">
+                <Link href="/merit-list/2025">
                   <Button className="w-full justify-between group-hover:translate-x-1 transition-transform bg-blue-500 hover:bg-blue-600">
-                    2024 Merit List
+                    2025 Merit List
                     <ArrowRight className="h-4 w-4" />
                   </Button>
                 </Link>
-                <Link href="/merit-list/2023">
+                <Link href="/merit-list/2024">
                   <Button variant="outline" className="w-full justify-between group-hover:translate-x-1 transition-transform border-blue-200 hover:bg-blue-50 hover:text-blue-600">
-                    2023 Merit List
+                    2024 Merit List
                     <ArrowRight className="h-4 w-4" />
                   </Button>
                 </Link>
@@ -64,12 +62,6 @@ export default function Home() {
                 <Link href="/allotment/2024">
                   <Button className="w-full justify-between group-hover:translate-x-1 transition-transform bg-green-500 hover:bg-green-600">
                     2024 Allotment
-                    <ArrowRight className="h-4 w-4" />
-                  </Button>
-                </Link>
-                <Link href="/allotment/2023">
-                  <Button variant="outline" className="w-full justify-between group-hover:translate-x-1 transition-transform border-green-200 hover:bg-green-50 hover:text-green-600">
-                    2023 Allotment
                     <ArrowRight className="h-4 w-4" />
                   </Button>
                 </Link>
@@ -101,7 +93,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Info Section */}
       <section className="container mx-auto py-12 px-4 text-center">
         <div className="max-w-2xl mx-auto">
           <h2 className="text-2xl font-semibold mb-4">Need Help?</h2>

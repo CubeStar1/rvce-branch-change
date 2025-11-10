@@ -11,22 +11,10 @@ export async function GET(request: NextRequest) {
 
   const supabase = createSupabaseServer()
   
-  const { data, error } = await supabase
+  const { data } = supabase
     .storage
     .from('branch_change')
-    .download(`circulars/${filename}.pdf`)
+    .getPublicUrl(`circulars/${filename}.pdf`)
 
-  if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 })
-  }
-
-  // Convert blob to array buffer
-  const arrayBuffer = await data.arrayBuffer()
-
-  return new NextResponse(arrayBuffer, {
-    headers: {
-      'Content-Type': 'application/pdf',
-      'Content-Disposition': `attachment; filename=${filename}.pdf`,
-    },
-  })
+  return NextResponse.redirect(data.publicUrl)
 } 

@@ -87,21 +87,20 @@ const circulars = [
 export default function GuidePage() {
   const handleDownload = async (filename: string) => {
     try {
-      const response = await fetch(`/api/circulars/download?filename=${filename}`)
+      const response = await fetch(`/api/circulars/view?filename=${filename}`)
       
       if (!response.ok) {
-        throw new Error('Download failed')
+        throw new Error('Failed to get download URL')
       }
 
-      const blob = await response.blob()
-      const url = window.URL.createObjectURL(blob)
+      const { url } = await response.json()
       const link = document.createElement('a')
       link.href = url
       link.download = `${filename}.pdf`
+      link.target = '_blank'
       document.body.appendChild(link)
       link.click()
       link.remove()
-      window.URL.revokeObjectURL(url)
     } catch (error) {
       console.error('Error downloading file:', error)
     }
@@ -124,18 +123,14 @@ export default function GuidePage() {
 
   return (
     <div className="container mx-auto py-10 space-y-10 px-4 sm:px-0">
-      {/* Timeline Section */}
       <section>
         <h2 className="text-3xl font-bold mb-6">Branch Change Process Timeline</h2>
         <div className="relative">
-          {/* Vertical line */}
           <div className="absolute left-4 h-full w-0.5 bg-border hidden sm:block" />
           
-          {/* Timeline items */}
           <div className="space-y-4">
             {timelineData.map((item, index) => (
               <div key={index} className="pl-0 sm:pl-12 relative">
-                {/* Timeline dot */}
                 <div className="hidden sm:block absolute left-2.5 top-6 w-3 h-3 rounded-full bg-primary border-4 border-background" />
                 
                 <Card>
@@ -171,7 +166,6 @@ export default function GuidePage() {
         </div>
       </section>
 
-      {/* Circulars Section */}
       <section>
         <h2 className="text-3xl font-bold mb-6">Important Documents</h2>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">

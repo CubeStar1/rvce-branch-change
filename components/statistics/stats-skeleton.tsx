@@ -13,7 +13,6 @@ export function StatsSkeleton() {
         <Card>
           <CardContent className="pt-6">
             <div className="space-y-8">
-              {/* Stats Cards */}
               <div className="grid gap-4 md:grid-cols-3">
                 {[1, 2, 3].map((i) => (
                   <Card key={i}>
@@ -35,9 +34,7 @@ export function StatsSkeleton() {
                 ))}
               </div>
 
-              {/* Charts Grid */}
               <div className="grid gap-4 md:grid-cols-2">
-                {/* Inflow Chart */}
                 <Card>
                   <CardHeader>
                     <CardTitle>
@@ -50,7 +47,6 @@ export function StatsSkeleton() {
                   </CardContent>
                 </Card>
 
-                {/* Outflow Chart */}
                 <Card>
                   <CardHeader>
                     <CardTitle>
@@ -64,7 +60,6 @@ export function StatsSkeleton() {
                 </Card>
               </div>
 
-              {/* Cutoff Chart */}
               <Card>
                 <CardHeader>
                   <CardTitle>

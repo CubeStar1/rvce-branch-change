@@ -24,23 +24,19 @@ const components = [
   {
     title: "Guide",
     href: "/guide",
-  },
-  {
-    title: "Statistics",
-    href: "/allotment/statistics/2024",
   }
 ]
 
 const meritListItems = [
   {
+    title: "2025 Merit List",
+    href: "/merit-list/2025",
+    description: "View branch change merit list for 2025",
+  },
+  {
     title: "2024 Merit List",
     href: "/merit-list/2024",
     description: "View branch change merit list for 2024",
-  },
-  {
-    title: "2023 Merit List",
-    href: "/merit-list/2023",
-    description: "View branch change merit list for 2023",
   }
 ]
 
@@ -50,15 +46,13 @@ const allotmentItems = [
     href: "/allotment/2024",
     description: "View final branch change allotments for 2024",
   },
+]
+
+const statisticsItems = [
   {
-    title: "2023 Allotment",
-    href: "/allotment/2023",
-    description: "View final branch change allotments for 2023",
-  },
-  {
-    title: "Statistics",
+    title: "2024 Statistics",
     href: "/allotment/statistics/2024",
-    description: "Branch-wise allotment statistics over the years",
+    description: "View detailed statistics and analytics for 2024",
   }
 ]
 
@@ -103,8 +97,24 @@ export function Header() {
               <NavigationMenuItem>
                 <NavigationMenuTrigger>Allotment</NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                  <ul className="grid w-[400px] gap-3 p-4">
                     {allotmentItems.map((item) => (
+                      <ListItem
+                        key={item.title}
+                        title={item.title}
+                        href={item.href}
+                      >
+                        {item.description}
+                      </ListItem>
+                    ))}
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuTrigger>Statistics</NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className="grid w-[400px] gap-3 p-4 ">
+                    {statisticsItems.map((item) => (
                       <ListItem
                         key={item.title}
                         title={item.title}
@@ -125,6 +135,7 @@ export function Header() {
               components={components} 
               meritListItems={meritListItems}
               allotmentItems={allotmentItems}
+              statisticsItems={statisticsItems}
             />
           </div>
           <ModeToggle />

@@ -4,17 +4,12 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter }
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts"
 import { ArrowRightLeft, TrendingUp, School } from "lucide-react"
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
+import { BranchStats, OverviewStats } from "@/lib/utils/statistics"
 
 interface StatsOverviewProps {
-  data: any[]
+  overviewStats: OverviewStats
+  branchStats: BranchStats[]
   year: string
-}
-
-interface BranchStats {
-  branch: string
-  inflow: number
-  outflow: number
-  cutoff: number
 }
 
 const inflowConfig = {
@@ -38,48 +33,23 @@ const cutoffConfig = {
   },
 } satisfies ChartConfig
 
-export function StatsOverview({ data, year }: StatsOverviewProps) {
-  // Calculate statistics
-  const totalBranchChanges = data.length
-  const uniqueNewBranches = [...new Set(data.map(item => item.new_branch))]
-  const averageCGPA = (data.reduce((acc, curr) => acc + curr.cgpa, 0) / data.length).toFixed(2)
-
-  // Calculate branch-wise statistics
-  const branchStats: BranchStats[] = [
-    'CSE', 'ISE', 'ECE', 'CD', 'CY', 'AIML', 'ETE', 
-    'IEM', 'EIE', 'EEE', 'ME', 'CV', 'AS', 'CH'
-  ].map(branch => {
-    const inflow = data.filter(item => item.new_branch === branch).length
-    const outflow = data.filter(item => item.old_branch === branch).length
-    const branchEntries = data.filter(item => item.new_branch === branch)
-    const branchCutoff = branchEntries.length > 0
-      ? Math.min(...branchEntries.map(item => item.cgpa))
-      : 0
-
-    return {
-      branch,
-      inflow,
-      outflow,
-      cutoff: branchCutoff
-    }
-  })
-
+export function StatsOverview({ overviewStats, branchStats, year }: StatsOverviewProps) {
   const statsCards = [
     {
       title: "Total Branch Changes",
-      value: totalBranchChanges,
+      value: overviewStats.totalBranchChanges,
       icon: ArrowRightLeft,
       description: `Students who changed branches in ${year}`
     },
     {
       title: "Branches Involved",
-      value: uniqueNewBranches.length,
+      value: overviewStats.uniqueNewBranches,
       icon: School,
       description: "Departments that received students"
     },
     {
       title: "Average CGPA",
-      value: averageCGPA,
+      value: overviewStats.averageCGPA,
       icon: TrendingUp,
       description: "Of successful applicants"
     },

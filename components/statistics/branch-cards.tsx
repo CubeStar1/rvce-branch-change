@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { ArrowDownRight, ArrowUpRight, Trophy, Target, BarChart3, Calculator } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { DetailedBranchStats } from "@/lib/utils/statistics"
 
 interface BranchCardProps {
   branch: string
@@ -12,7 +13,6 @@ interface BranchCardProps {
   medianCGPA: number
 }
 
-// Branch color mapping
 const branchColors: Record<string, string> = {
   'CSE': 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400',
   'ISE': 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400',
@@ -52,7 +52,6 @@ function BranchCard({
         </div>
       </CardHeader>
       <CardContent className="grid gap-4">
-        {/* Movement Statistics */}
         <div className="rounded-lg border p-4">
           <h4 className="text-sm font-semibold text-muted-foreground mb-3">Branch Movement</h4>
           <div className="grid grid-cols-2 gap-4">
@@ -73,7 +72,6 @@ function BranchCard({
           </div>
         </div>
 
-        {/* CGPA Analysis */}
         <div className="rounded-lg border p-4">
           <h4 className="text-sm font-semibold text-muted-foreground mb-3">CGPA Analysis</h4>
           <div className="grid grid-cols-2 gap-4">
@@ -121,48 +119,18 @@ function BranchCard({
 }
 
 interface BranchCardsProps {
-  data: any[]
+  detailedBranchStats: DetailedBranchStats[]
 }
 
-export function BranchCards({ data }: BranchCardsProps) {
-  const branches = [
-    'CSE', 'ISE', 'ECE', 'CD', 'CY', 'AIML', 'ETE', 
-    'IEM', 'EIE', 'EEE', 'ME', 'CV', 'AS', 'CH'
-  ]
-
-  const getBranchStats = (branch: string) => {
-    const inflow = data.filter(item => item.new_branch === branch)
-    const outflow = data.filter(item => item.old_branch === branch)
-    
-    const inflowCGPAs = inflow.map(item => item.cgpa)
-    const medianCGPA = inflowCGPAs.length > 0 
-      ? inflowCGPAs.sort((a, b) => a - b)[Math.floor(inflowCGPAs.length / 2)]
-      : 0
-
-    return {
-      inflow: inflow.length,
-      outflow: outflow.length,
-      highestCGPA: inflow.length > 0 ? Math.max(...inflowCGPAs) : 0,
-      lowestCGPA: inflow.length > 0 ? Math.min(...inflowCGPAs) : 0,
-      averageCGPA: inflow.length > 0 
-        ? inflowCGPAs.reduce((a, b) => a + b, 0) / inflowCGPAs.length
-        : 0,
-      medianCGPA,
-    }
-  }
-
+export function BranchCards({ detailedBranchStats }: BranchCardsProps) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-      {branches.map(branch => {
-        const stats = getBranchStats(branch)
-        return (
-          <BranchCard
-            key={branch}
-            branch={branch}
-            {...stats}
-          />
-        )
-      })}
+      {detailedBranchStats.map(stats => (
+        <BranchCard
+          key={stats.branch}
+          {...stats}
+        />
+      ))}
     </div>
   )
 } 
